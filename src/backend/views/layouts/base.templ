@@ -1,0 +1,27 @@
+package layouts
+
+import "github.com/sei-shigeo/website-waseisyouji/views/components"
+
+templ Base() {
+	<!DOCTYPE html>
+	<html lang="ja">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="stylesheet" href="/assets/css/reset.css">
+			<link rel="stylesheet" href="/assets/css/style.css">
+			<title>ExampleSite-A</title>
+		</head>
+		<body>
+			<header>
+				@components.Header()
+			</header>
+			<main>
+				{ children... }
+			</main>
+			<footer>
+				@components.Footer()
+			</footer>
+		</body>
+	</html>
+}

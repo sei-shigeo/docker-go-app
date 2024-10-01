@@ -1,0 +1,48 @@
+# バージョン管理システムのディレクトリ
+.git
+.gitignore
+
+# ビルド成果物
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# テストファイル
+*_test.go
+
+# Go言語の一時ファイルやディレクトリ
+*.test
+*.out
+/vendor/
+/Godeps/
+
+# エディタの一時ファイル
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS生成ファイル
+.DS_Store
+Thumbs.db
+
+# アプリケーション固有の一時ファイルやログ
+/tmp
+*.log
+
+# 環境設定ファイル（セキュリティ上の理由から除外）
+.env
+*.env
+
+# Dockerファイル自体（通常は含める必要がない）
+Dockerfile
+docker-compose.yml
+
+# READMEやドキュメント（必要に応じて）
+README.md
+docs/
+
+# データディレクトリ（volumesで管理するため）
+/data
