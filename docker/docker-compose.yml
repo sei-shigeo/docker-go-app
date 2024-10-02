@@ -1,16 +1,37 @@
-services: # このセクションでは、アプリケーションを構成する各サービス（コンテナ）を定義します。
-  web:
-    image: myapp:latest # 使用するDockerイメージ名とタグを指定。'latest'は最新バージョンを示しますが、特定のバージョンを指定することも可能です。
-    build: # イメージのビルド設定。イメージが存在しない場合、この設定に基づいてビルドされます。
-      context: .. # ビルドコンテキストをカレントディレクトリ(.)に設定。Dockerfileやソースコードがあるディレクトリを指定します。
-      dockerfile: docker/backend.dockerfile # 使用するDockerfileを指定。省略可能で、デフォルトはカレントディレクトリのDockerfileです。
-    labels: # コンテナに追加のラベルを設定。これらはコンテナのメタデータとして使用できます。
+services:
+  backend:
+    image: myapp:latest
+    build:
+      context: ..
+      dockerfile: docker/backend.dockerfile
+    labels:
       - "environment=${ENVIRONMENT:-unknown}"
-    ports: # ポートマッピングを設定。コンテナのポートをホストマシンのポートに公開します。
-      - "8080:8080" # ホストの8080ポートをコンテナの8080ポートにマッピング。左がホスト側、右がコンテナ側のポートです。
-    restart: unless-stopped # コンテナの再起動ポリシーを設定。unless-stoppedは、手動で停止しない限りコンテナを常に再起動します。
-    env_file: # 環境変数の設定。コンテナ内で利用可能な環境変数を定義します。
+    ports:
+      - "8080:8080"
+      - "7331:7331"
+    restart: unless-stopped
+    env_file:
       - ../config/.env.${ENVIRONMENT:-development}
-    # volumes: # ボリュームのマウント設定。ホストとコンテナ間でデータを共有するために使用します。
-    #   - ../data:/app/data # ホストの./dataディレクトリをコンテナの/app/dataにマウント。データの永続化に役立ちます。
-    #   - ../src:/app/src # ホストの./srcディレクトリをコンテナの/app/srcにマウント。ソースコードをコンテナにマウントして、コンテナ内でコードを編集できるようにします。
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=mydatabase
+      - DATABASE_USER=myuser
+      - DATABASE_PASSWORD=mypassword
+    volumes:
+      - ../src/backend:/app/
+    
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:

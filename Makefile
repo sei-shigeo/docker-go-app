@@ -63,7 +63,7 @@ shell:
 	@if [ -z "$(SERVICE)" ]; then \
 		chmod +x ./script/select_service.sh && ./script/select_service.sh $(SERVICES); \
 	else \
-		$(DC) exec $(SERVICE) /bin/sh; \
+		$(DC) exec $(SERVICE) /bin/bash; \
 	fi
 
 

@@ -11,7 +11,13 @@ import (
 var err error
 
 func greetHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("Hello, world!")
 	views.Home().Render(r.Context(), w)
+}
+
+func logHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("Hello, world!!!!!!!")
+	fmt.Fprintf(w, "abcd Hello, world!!!!!!!")
 }
 
 func setupAssetsDir(mux *http.ServeMux) {
@@ -34,5 +40,6 @@ func main() {
 	mux := http.NewServeMux()
 	setupAssetsDir(mux)
 	mux.HandleFunc("/", greetHandler)
+	mux.HandleFunc("/log", logHandler)
 	startServer(mux)
 }
