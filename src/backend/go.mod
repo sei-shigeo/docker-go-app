@@ -1,4 +1,4 @@
-module github.com/sei-shigeo/website-waseisyouji
+module github.com/sei-shigeo/website-waseisyouji-001
 
 go 1.23.2
 

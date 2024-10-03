@@ -3,34 +3,3 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-body {
-  font-family: "Noto Sans JP", sans-serif;
-  height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-}
-
-:is(.header-container, .main-container, .footer-container) {
-  padding: 1rem;
-}
-
-header {
-  background-color: #a4a4a4;
-  & .header-container {
-    text-align: center;
-  }
-}
-
-main {
-  & .main-container {
-    text-align: center;
-  }
-}
-
-footer {
-  background-color: #f0f0f0;
-  & .footer-container {
-    text-align: center;
-  }
-}

@@ -1,9 +1,10 @@
 services:
   backend:
-    image: myapp:latest
+    image: myapp:${TARGET:-development}
     build:
       context: ..
       dockerfile: docker/backend.dockerfile
+      target: ${TARGET:-development}
     labels:
       - "environment=${ENVIRONMENT:-unknown}"
     ports:

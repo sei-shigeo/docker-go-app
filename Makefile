@@ -34,7 +34,7 @@ up:
 		select env in $(ENVIRONMENTS); do \
 			if [ -n "$$env" ]; then \
 				echo "選択された環境: $$env"; \
-				ENVIRONMENT=$$env $(DC) up -d; \
+				TARGET=$$env ENVIRONMENT=$$env $(DC) up -d --build; \
 				break; \
 			else \
 				echo "無効な選択です。もう一度試してください。"; \
